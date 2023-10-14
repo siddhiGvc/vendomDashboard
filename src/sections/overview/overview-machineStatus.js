@@ -145,8 +145,8 @@ export const MachineStatus = (props) => {
   );
 };
 
-MachineStatus.propTypes = {
-  chartSeries: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired,
-  sx: PropTypes.object
-};
+// MachineStatus.propTypes = {
+//   chartSeries: PropTypes.array.isRequired,
+//   labels: PropTypes.array.isRequired,
+//   sx: PropTypes.object
+// };

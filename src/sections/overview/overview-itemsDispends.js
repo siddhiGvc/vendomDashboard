@@ -42,7 +42,7 @@ export const ItemsDispends = (props) => {
   );
 };
 
-ItemsDispends.propTypes = {
-  value: PropTypes.string,
-  sx: PropTypes.object
-};
+// ItemsDispends.propTypes = {
+//   value: PropTypes.string,
+//   sx: PropTypes.object
+// };

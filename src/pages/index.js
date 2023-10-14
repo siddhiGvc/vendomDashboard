@@ -12,6 +12,7 @@ import { ItemsDispends } from 'src/sections/overview/overview-itemsDispends';
 import {MachineStatus } from 'src/sections/overview/overview-machineStatus';
 import { StockStatus } from 'src/sections/overview/overview-stockStatus';
 import { useEffect ,useState} from 'react';
+import moment from 'moment';
 import $ from 'jquery';
 
 const now = new Date();
@@ -23,6 +24,30 @@ const Page = () => {
   const [ofline,setOfline]=useState();
   const [cash,setCash]=useState();
   const [minuteWiseData,setMinuteWiseData]=useState([]);
+
+  const filterOnline = q => moment().diff(moment.utc((q.lastHeartbeatTime || q.lastOnTime).replace('Z', '')), 'minute') < 5;
+  const filterStock = q => moment().diff(moment.utc((q.lastHeartbeatTime || q.lastOnTime).replace('Z', '')), 'minute') < 5;
+
+  const amountText = amt => {
+    amt = amt || 0;
+    // console.log(amt);
+    // parseFloat(originalValue.toFixed(2))
+    const cr = parseFloat(((amt / 100000) / 100).toFixed(2));
+    const Cr=cr.toFixed(2)
+    const l = (amt / 1000) / 100;
+    const L=l.toFixed(2)
+    const k = (amt / 10) / 100;
+    const K=k.toFixed(2)
+    const result = Cr < 1 ?
+    (L < 1 ? `${K}K` : `${l}L`) :
+    `${cr}Cr`;
+      
+    // console.log(result);
+      return result;
+    
+   
+};
+const sum = (a, b) => a + b;
 
 
     const LoadData=()=>{
@@ -58,6 +83,15 @@ const Page = () => {
   
      
   }
+
+  useEffect(()=>{
+    LoadData();
+    // setInterval(()=>{
+    //   LoadData();
+
+    // },2000)
+  
+  })
    
 
    return <>
@@ -87,7 +121,7 @@ const Page = () => {
               difference={12}
               positive
               sx={{ height: '100%' }}
-              value="$24k"
+              value={machine}
               name="Machines Installed"
             />
           </Grid>
@@ -100,7 +134,7 @@ const Page = () => {
               difference={16}
               positive={false}
               sx={{ height: '100%' }}
-              value="1.6k"
+              value={online}
               name="Machines Running"
             />
           </Grid>
@@ -111,7 +145,7 @@ const Page = () => {
           >
             <TotalCollections
               sx={{ height: '100%' }}
-              value={75.5}
+              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)).toString():0}
               name="Total Collections"
             />
           </Grid>
@@ -122,7 +156,7 @@ const Page = () => {
           >
             <ItemsDispends
               sx={{ height: '100%' }}
-              value="$15k"
+              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)).toString():0}
               name="Items Dispends"
             />
           </Grid>
@@ -156,7 +190,7 @@ const Page = () => {
                md={6}
                lg={6}>
             <MachineStatus
-              chartSeries={[63, 15]}
+              chartSeries={[online,machine-online]}
               labels={['Online','Offline']}
               chartType="donut"
             
@@ -167,7 +201,13 @@ const Page = () => {
                md={6}
                lg={6}>
                <StockStatus
-              chartSeries={[63, 15, 22,10]}
+            
+              chartSeries={[
+                data.data.filter(filterOnline).filter(m => m.spiral_a_status === 3).length ,
+                data.data.filter(filterOnline).filter(m => m.spiral_a_status === 1).length ,
+                data.data.filter(filterOnline).filter(m => m.spiral_a_status === 0).length,
+                data.data.filter(filterOnline).filter(m => m.spiral_a_status === 2).length ,
+              ]}
               labels={['Ok','Low','Empty','Unknown']}
               chartType="donut"
            
