@@ -23,20 +23,20 @@ const useChartOptions = (labels) => {
       background: 'transparent'
     },
     colors: [
-      theme.palette.primary.main,
+      theme.palette.error.main,
       theme.palette.success.main,
-      theme.palette.warning.main
+     
     ],
     dataLabels: {
-      enabled: false
+      enabled: true
     },
     labels,
     legend: {
-      show: false
+      show: true
     },
     plotOptions: {
       pie: {
-        expandOnClick: false
+        expandOnClick: true
       }
     },
     states: {
@@ -81,7 +81,7 @@ const iconMap = {
   )
 };
 
-export const OverviewTraffic = (props) => {
+export const MachineStatus = (props) => {
   const [data,setData]=useState([]);
   const { chartSeries, labels, sx ,chartType} = props;
   const chartOptions = useChartOptions(labels);
@@ -94,7 +94,7 @@ export const OverviewTraffic = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Traffic Source" />
+      <CardHeader title="Machine Status" />
       <CardContent>
         <Chart
           height={300}
@@ -104,7 +104,7 @@ export const OverviewTraffic = (props) => {
           width="100%"
         />
        
-        <Stack
+        {/* <Stack
           alignItems="center"
           direction="row"
           justifyContent="center"
@@ -139,13 +139,13 @@ export const OverviewTraffic = (props) => {
               </Box>
             );
           })}
-        </Stack>
+        </Stack> */}
       </CardContent>
     </Card>
   );
 };
 
-OverviewTraffic.propTypes = {
+MachineStatus.propTypes = {
   chartSeries: PropTypes.array.isRequired,
   labels: PropTypes.array.isRequired,
   sx: PropTypes.object

@@ -9,7 +9,8 @@ import { OverviewSales } from 'src/sections/overview/overview-sales';
 import {TotalCollections} from 'src/sections/overview/overview-totalCollections';
 import { MachinesRunning } from 'src/sections/overview/overview-machinesRunning';
 import { ItemsDispends } from 'src/sections/overview/overview-itemsDispends';
-import { OverviewTraffic } from 'src/sections/overview/overview-traffic';
+import {MachineStatus } from 'src/sections/overview/overview-machineStatus';
+import { StockStatus } from 'src/sections/overview/overview-stockStatus';
 
 const now = new Date();
 
@@ -109,9 +110,9 @@ const Page = () => (
                xs={12}
                md={6}
                lg={6}>
-            <OverviewTraffic
-              chartSeries={[63, 15, 22]}
-              labels={['Desktop', 'Tablet', 'Phone']}
+            <MachineStatus
+              chartSeries={[63, 15]}
+              labels={['Online','Offline']}
               chartType="donut"
             
             />
@@ -120,9 +121,9 @@ const Page = () => (
                xs={12}
                md={6}
                lg={6}>
-               <OverviewTraffic
-              chartSeries={[63, 15, 22]}
-              labels={['Desktop', 'Tablet', 'Phone']}
+               <StockStatus
+              chartSeries={[63, 15, 22,10]}
+              labels={['Ok','Low','Empty','Unknown']}
               chartType="donut"
            
             />
