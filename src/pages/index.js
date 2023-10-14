@@ -11,11 +11,56 @@ import { MachinesRunning } from 'src/sections/overview/overview-machinesRunning'
 import { ItemsDispends } from 'src/sections/overview/overview-itemsDispends';
 import {MachineStatus } from 'src/sections/overview/overview-machineStatus';
 import { StockStatus } from 'src/sections/overview/overview-stockStatus';
+import { useEffect ,useState} from 'react';
+import $ from 'jquery';
 
 const now = new Date();
 
-const Page = () => (
-  <>
+const Page = () => {
+  const [data,setData]=useState({data:[],dataAll:[]});
+  const [machine,setMachines]=useState()
+  const [online,setOnline]=useState();
+  const [ofline,setOfline]=useState();
+  const [cash,setCash]=useState();
+  const [minuteWiseData,setMinuteWiseData]=useState([]);
+
+
+    const LoadData=()=>{
+      const apiUrl = 'http://165.232.177.23:8080/api/machine/data?status=Online,Offine & city=Mumbai'; // Replace with your API URL
+      const url = `${apiUrl}/me`;
+  
+      // Set up the headers
+      $.ajaxSetup({
+        headers: {
+          'x-token':sessionStorage.getItem('token'),
+        },
+      });
+  
+      // Make the AJAX request
+      $.ajax({
+        url,
+        type: 'GET',
+        success: (json) => {
+         
+          setData(json.data);
+              setMachines(json.data.dataAll.length)
+              setOnline(json.data.data.filter(filterOnline).length);
+              setOfline(json.data.data.length-json.data.data.filter(filterOnline).length);
+              setCash(json.data.dataAll.length ?amountText(json.data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0);
+            
+          
+        },
+        error: (_) => {
+          // Handle an error here (e.g., redirect to the login page)
+          window.location = '/login';
+        },
+      });
+  
+     
+  }
+   
+
+   return <>
     <Head>
       {/* <title>
         Overview | Devias Kit
@@ -245,7 +290,7 @@ const Page = () => (
       </Container>
     </Box>
   </>
-);
+}
 
 Page.getLayout = (page) => (
   <DashboardLayout>

@@ -52,7 +52,7 @@ const useChartOptions = (labels) => {
       }
     },
     stroke: {
-      width: 0
+      width: 3
     },
     theme: {
       mode: theme.palette.mode
