@@ -32,7 +32,7 @@ export const TotalCollections = (props) => {
               {name}
             </Typography>
             <Typography variant="h4">
-              {value}%
+              {value}
             </Typography>
           </Stack>
           <Avatar
@@ -58,7 +58,7 @@ export const TotalCollections = (props) => {
   );
 };
 
-TotalCollections.propTypes = {
-  value: PropTypes.number.isRequired,
-  sx: PropTypes.object
-};
+// TotalCollections.propTypes = {
+//   value: PropTypes.number.isRequired,
+//   sx: PropTypes.object
+// };

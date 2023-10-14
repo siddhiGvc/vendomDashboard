@@ -32,17 +32,20 @@ const Page = () => {
     amt = amt || 0;
     // console.log(amt);
     // parseFloat(originalValue.toFixed(2))
-    const cr = parseFloat(((amt / 100000) / 100).toFixed(2));
-    const Cr=cr.toFixed(2)
+    const cr = (amt / 100000) / 100;
+    const Cr=parseFloat(cr.toFixed(2))
     const l = (amt / 1000) / 100;
-    const L=l.toFixed(2)
+    const L=parseFloat(l.toFixed(2))
     const k = (amt / 10) / 100;
-    const K=k.toFixed(2)
+    const K=parseFloat(k.toFixed(2))
     const result = Cr < 1 ?
-    (L < 1 ? `${K}K` : `${l}L`) :
-    `${cr}Cr`;
+    L < 1 ? `${K} K` : `${l} L` :
+    `${cr} Cr`;
+//     const originalValue = 27.75676;
+// const roundedValue = parseFloat(originalValue.toFixed(2));
+// console.log(roundedValue);
       
-    // console.log(result);
+    console.log(result);
       return result;
     
    
@@ -71,7 +74,7 @@ const sum = (a, b) => a + b;
               setMachines(json.data.dataAll.length)
               setOnline(json.data.data.filter(filterOnline).length);
               setOfline(json.data.data.length-json.data.data.filter(filterOnline).length);
-              setCash(json.data.dataAll.length ?amountText(json.data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0);
+              setCash(json.data.data.length ?amountText(json.data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0);
             
           
         },
@@ -85,13 +88,14 @@ const sum = (a, b) => a + b;
   }
 
   useEffect(()=>{
-    LoadData();
-    // setInterval(()=>{
-    //   LoadData();
+    setInterval(()=>{
+      LoadData();
 
-    // },2000)
+    },2000)
+    
+    
   
-  })
+  },[])
    
 
    return <>
@@ -145,7 +149,7 @@ const sum = (a, b) => a + b;
           >
             <TotalCollections
               sx={{ height: '100%' }}
-              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)).toString():0}
+              value={data.data.length ?amountText(data.data.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
           </Grid>
@@ -156,7 +160,7 @@ const sum = (a, b) => a + b;
           >
             <ItemsDispends
               sx={{ height: '100%' }}
-              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)).toString():0}
+              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
           </Grid>

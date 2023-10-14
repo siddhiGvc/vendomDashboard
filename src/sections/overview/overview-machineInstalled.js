@@ -77,9 +77,9 @@ export const MachinesInstalled = (props) => {
   );
 };
 
-MachinesInstalled.prototypes = {
-  difference: PropTypes.number,
-  positive: PropTypes.bool,
-  sx: PropTypes.object,
-  value: PropTypes.string.isRequired
-};
+// MachinesInstalled.prototypes = {
+//   difference: PropTypes.number,
+//   positive: PropTypes.bool,
+//   sx: PropTypes.object,
+//   value: PropTypes.string.isRequired
+// };

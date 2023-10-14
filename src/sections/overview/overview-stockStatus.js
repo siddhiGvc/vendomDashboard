@@ -159,8 +159,8 @@ export const StockStatus = (props) => {
   );
 };
 
-StockStatus.propTypes = {
-  chartSeries: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired,
-  sx: PropTypes.object
-};
+// StockStatus.propTypes = {
+//   chartSeries: PropTypes.array.isRequired,
+//   labels: PropTypes.array.isRequired,
+//   sx: PropTypes.object
+// };
