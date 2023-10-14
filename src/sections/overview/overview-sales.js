@@ -108,49 +108,51 @@ export const OverviewSales = (props) => {
   const { chartSeries, sx } = props;
   const chartOptions = useChartOptions();
 
-  return (
-    <Card sx={sx}>
-      <CardHeader
-        action={(
-          <Button
-            color="inherit"
-            size="small"
-            startIcon={(
-              <SvgIcon fontSize="small">
-                <ArrowPathIcon />
-              </SvgIcon>
-            )}
-          >
-            Sync
-          </Button>
-        )}
-        title="Sales"
-      />
-      <CardContent>
-        <Chart
-          height={350}
-          options={chartOptions}
-          series={chartSeries}
-          type="bar"
-          width="100%"
-        />
-      </CardContent>
-      <Divider />
-      <CardActions sx={{ justifyContent: 'flex-end' }}>
-        <Button
-          color="inherit"
-          endIcon={(
-            <SvgIcon fontSize="small">
-              <ArrowRightIcon />
-            </SvgIcon>
-          )}
-          size="small"
-        >
-          Overview
-        </Button>
-      </CardActions>
-    </Card>
-  );
+  return<>
+  </>
+
+    // <Card sx={sx}>
+    //   <CardHeader
+    //     action={(
+    //       <Button
+    //         color="inherit"
+    //         size="small"
+    //         startIcon={(
+    //           <SvgIcon fontSize="small">
+    //             <ArrowPathIcon />
+    //           </SvgIcon>
+    //         )}
+    //       >
+    //         Sync
+    //       </Button>
+    //     )}
+    //     title="Sales"
+    //   />
+    //   <CardContent>
+    //     <Chart
+    //       height={350}
+    //       options={chartOptions}
+    //       series={chartSeries}
+    //       type="bar"
+    //       width="100%"
+    //     />
+    //   </CardContent>
+    //   <Divider />
+    //   <CardActions sx={{ justifyContent: 'flex-end' }}>
+    //     <Button
+    //       color="inherit"
+    //       endIcon={(
+    //         <SvgIcon fontSize="small">
+    //           <ArrowRightIcon />
+    //         </SvgIcon>
+    //       )}
+    //       size="small"
+    //     >
+    //       Overview
+    //     </Button>
+    //   </CardActions>
+    // </Card>
+    
 };
 
 OverviewSales.protoTypes = {

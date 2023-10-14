@@ -13,6 +13,7 @@ import {
   useTheme
 } from '@mui/material';
 import { Chart } from 'src/components/chart';
+import { useEffect, useState } from 'react';
 
 const useChartOptions = (labels) => {
   const theme = useTheme();
@@ -81,8 +82,15 @@ const iconMap = {
 };
 
 export const OverviewTraffic = (props) => {
-  const { chartSeries, labels, sx } = props;
+  const [data,setData]=useState([]);
+  const { chartSeries, labels, sx ,chartType} = props;
   const chartOptions = useChartOptions(labels);
+  
+
+  useEffect(()=>{
+    
+
+  })
 
   return (
     <Card sx={sx}>
@@ -92,9 +100,10 @@ export const OverviewTraffic = (props) => {
           height={300}
           options={chartOptions}
           series={chartSeries}
-          type="donut"
+          type={chartType}
           width="100%"
         />
+       
         <Stack
           alignItems="center"
           direction="row"

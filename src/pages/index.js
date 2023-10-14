@@ -16,9 +16,9 @@ const now = new Date();
 const Page = () => (
   <>
     <Head>
-      <title>
+      {/* <title>
         Overview | Devias Kit
-      </title>
+      </title> */}
     </Head>
     <Box
       component="main"
@@ -76,7 +76,7 @@ const Page = () => (
               value="$15k"
             />
           </Grid>
-          <Grid
+          {/* <Grid
             xs={12}
             lg={8}
           >
@@ -93,19 +93,38 @@ const Page = () => (
               ]}
               sx={{ height: '100%' }}
             />
-          </Grid>
+          </Grid> */}
           <Grid
-            xs={12}
+            xs={22}
             md={6}
-            lg={4}
+            lg={30}
+            container
+            spacing={3}
           >
+            <Grid 
+               xs={12}
+               md={6}
+               lg={6}>
             <OverviewTraffic
               chartSeries={[63, 15, 22]}
               labels={['Desktop', 'Tablet', 'Phone']}
-              sx={{ height: '100%' }}
+              chartType="donut"
+            
             />
+            </Grid>
+            <Grid
+               xs={12}
+               md={6}
+               lg={6}>
+               <OverviewTraffic
+              chartSeries={[63, 15, 22]}
+              labels={['Desktop', 'Tablet', 'Phone']}
+              chartType="donut"
+           
+            />
+            </Grid>
           </Grid>
-          <Grid
+          {/* <Grid
             xs={12}
             md={6}
             lg={4}
@@ -145,8 +164,8 @@ const Page = () => (
               ]}
               sx={{ height: '100%' }}
             />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             xs={12}
             md={12}
             lg={8}
@@ -216,7 +235,7 @@ const Page = () => (
               ]}
               sx={{ height: '100%' }}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Box>
