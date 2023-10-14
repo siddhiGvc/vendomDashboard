@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
 import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { OverviewBudget } from 'src/sections/overview/overview-budget';
+import { MachinesInstalled } from 'src/sections/overview/overview-machineInstalled';
 import { OverviewLatestOrders } from 'src/sections/overview/overview-latest-orders';
 import { OverviewLatestProducts } from 'src/sections/overview/overview-latest-products';
 import { OverviewSales } from 'src/sections/overview/overview-sales';
-import { OverviewTasksProgress } from 'src/sections/overview/overview-tasks-progress';
-import { OverviewTotalCustomers } from 'src/sections/overview/overview-total-customers';
-import { OverviewTotalProfit } from 'src/sections/overview/overview-total-profit';
+import {TotalCollections} from 'src/sections/overview/overview-totalCollections';
+import { MachinesRunning } from 'src/sections/overview/overview-machinesRunning';
+import { ItemsDispends } from 'src/sections/overview/overview-itemsDispends';
 import { OverviewTraffic } from 'src/sections/overview/overview-traffic';
 
 const now = new Date();
@@ -37,11 +37,12 @@ const Page = () => (
             sm={6}
             lg={3}
           >
-            <OverviewBudget
+            <MachinesInstalled
               difference={12}
               positive
               sx={{ height: '100%' }}
               value="$24k"
+              name="Machines Installed"
             />
           </Grid>
           <Grid
@@ -49,11 +50,12 @@ const Page = () => (
             sm={6}
             lg={3}
           >
-            <OverviewTotalCustomers
+            <MachinesRunning
               difference={16}
               positive={false}
               sx={{ height: '100%' }}
               value="1.6k"
+              name="Machines Running"
             />
           </Grid>
           <Grid
@@ -61,9 +63,10 @@ const Page = () => (
             sm={6}
             lg={3}
           >
-            <OverviewTasksProgress
+            <TotalCollections
               sx={{ height: '100%' }}
               value={75.5}
+              name="Total Collections"
             />
           </Grid>
           <Grid
@@ -71,9 +74,10 @@ const Page = () => (
             sm={6}
             lg={3}
           >
-            <OverviewTotalProfit
+            <ItemsDispends
               sx={{ height: '100%' }}
               value="$15k"
+              name="Items Dispends"
             />
           </Grid>
           {/* <Grid

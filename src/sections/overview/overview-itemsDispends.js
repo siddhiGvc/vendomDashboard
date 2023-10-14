@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 
-export const OverviewTotalProfit = (props) => {
-  const { value, sx } = props;
+export const ItemsDispends = (props) => {
+  const {name, value, sx } = props;
 
   return (
     <Card sx={sx}>
@@ -19,7 +19,7 @@ export const OverviewTotalProfit = (props) => {
               color="text.secondary"
               variant="overline"
             >
-              Total Profit
+              {name}
             </Typography>
             <Typography variant="h4">
               {value}
@@ -42,7 +42,7 @@ export const OverviewTotalProfit = (props) => {
   );
 };
 
-OverviewTotalProfit.propTypes = {
+ItemsDispends.propTypes = {
   value: PropTypes.string,
   sx: PropTypes.object
 };

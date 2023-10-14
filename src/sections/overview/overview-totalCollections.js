@@ -11,8 +11,8 @@ import {
   Typography
 } from '@mui/material';
 
-export const OverviewTasksProgress = (props) => {
-  const { value, sx } = props;
+export const TotalCollections = (props) => {
+  const {name, value, sx } = props;
 
   return (
     <Card sx={sx}>
@@ -29,7 +29,7 @@ export const OverviewTasksProgress = (props) => {
               gutterBottom
               variant="overline"
             >
-              Task Progress
+              {name}
             </Typography>
             <Typography variant="h4">
               {value}%
@@ -47,18 +47,18 @@ export const OverviewTasksProgress = (props) => {
             </SvgIcon>
           </Avatar>
         </Stack>
-        <Box sx={{ mt: 3 }}>
+        {/* <Box sx={{ mt: 3 }}>
           <LinearProgress
             value={value}
             variant="determinate"
           />
-        </Box>
+        </Box> */}
       </CardContent>
     </Card>
   );
 };
 
-OverviewTasksProgress.propTypes = {
+TotalCollections.propTypes = {
   value: PropTypes.number.isRequired,
   sx: PropTypes.object
 };
