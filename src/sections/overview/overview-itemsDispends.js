@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
+import {BsBoxFill} from "react-icons/bs"
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 
 export const ItemsDispends = (props) => {
@@ -21,7 +22,7 @@ export const ItemsDispends = (props) => {
             >
               {name}
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
@@ -33,7 +34,7 @@ export const ItemsDispends = (props) => {
             }}
           >
             <SvgIcon>
-              <CurrencyDollarIcon />
+              <BsBoxFill/>
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -43,6 +44,6 @@ export const ItemsDispends = (props) => {
 };
 
 // ItemsDispends.propTypes = {
-//   value: PropTypes.string,
+//   value: PropTypes.string.isRequired,
 //   sx: PropTypes.object
 // };

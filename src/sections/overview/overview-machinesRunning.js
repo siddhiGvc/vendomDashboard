@@ -3,7 +3,7 @@ import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-
+import {ImSwitch} from "react-icons/im"
 export const MachinesRunning = (props) => {
   const {name, difference, positive = false, sx, value } = props;
 
@@ -23,7 +23,7 @@ export const MachinesRunning = (props) => {
             >
               {name}
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
@@ -35,7 +35,7 @@ export const MachinesRunning = (props) => {
             }}
           >
             <SvgIcon>
-              <UsersIcon />
+              <ImSwitch/>
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -77,10 +77,10 @@ export const MachinesRunning = (props) => {
   );
 };
 
-// MachinesRunning.propTypes = {
-//   difference: PropTypes.number,
-//   positive: PropTypes.bool,
-//   value: PropTypes.string.isRequired,
-//   sx: PropTypes.object
-// };
+MachinesRunning.propTypes = {
+  difference: PropTypes.number,
+  positive: PropTypes.bool,
+  value: PropTypes.number,
+  sx: PropTypes.object
+};
 

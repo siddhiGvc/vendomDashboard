@@ -66,7 +66,7 @@ const useChartOptions = (labels) => {
       }
     },
     stroke: {
-      width: 3
+      width: 1
     },
     theme: {
       mode: theme.palette.mode
@@ -97,7 +97,7 @@ const iconMap = {
 
 export const StockStatus = (props) => {
   const [data,setData]=useState([]);
-  const { chartSeries, labels, sx ,chartType} = props;
+  const { chartSeries, labels, sx } = props;
   const chartOptions = useChartOptions(labels);
   
 
@@ -114,7 +114,7 @@ export const StockStatus = (props) => {
           height={300}
           options={chartOptions}
           series={chartSeries}
-          type={chartType}
+          type="donut"
           width="100%"
         />
        
@@ -159,8 +159,8 @@ export const StockStatus = (props) => {
   );
 };
 
-// StockStatus.propTypes = {
-//   chartSeries: PropTypes.array.isRequired,
-//   labels: PropTypes.array.isRequired,
-//   sx: PropTypes.object
-// };
+StockStatus.propTypes = {
+  chartSeries: PropTypes.array.isRequired,
+  labels: PropTypes.array.isRequired,
+  sx: PropTypes.object
+};

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import ArrowUpIcon from '@heroicons/react/24/solid/ArrowUpIcon';
 import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
+import {AiFillTool} from 'react-icons/ai'
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 
 export const MachinesInstalled = (props) => {
@@ -23,7 +24,7 @@ export const MachinesInstalled = (props) => {
             >
               {name}
             </Typography>
-            <Typography variant="h4">
+            <Typography variant="h5">
               {value}
             </Typography>
           </Stack>
@@ -35,7 +36,7 @@ export const MachinesInstalled = (props) => {
             }}
           >
             <SvgIcon>
-              <CurrencyDollarIcon />
+              <AiFillTool/>
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -77,9 +78,9 @@ export const MachinesInstalled = (props) => {
   );
 };
 
-// MachinesInstalled.prototypes = {
-//   difference: PropTypes.number,
-//   positive: PropTypes.bool,
-//   sx: PropTypes.object,
-//   value: PropTypes.string.isRequired
-// };
+MachinesInstalled.prototypes = {
+  difference: PropTypes.number,
+  positive: PropTypes.bool,
+  sx: PropTypes.object,
+  value: PropTypes.number
+};

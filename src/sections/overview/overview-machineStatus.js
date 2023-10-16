@@ -84,7 +84,7 @@ const iconMap = {
 
 export const MachineStatus = (props) => {
   const [data,setData]=useState([]);
-  const { chartSeries, labels, sx ,chartType} = props;
+  const { chartSeries, labels, sx } = props;
   const chartOptions = useChartOptions(labels);
   
 
@@ -101,7 +101,7 @@ export const MachineStatus = (props) => {
           height={300}
           options={chartOptions}
           series={chartSeries}
-          type={chartType}
+          type="donut"
           width="100%"
         />
        
@@ -146,8 +146,8 @@ export const MachineStatus = (props) => {
   );
 };
 
-// MachineStatus.propTypes = {
-//   chartSeries: PropTypes.array.isRequired,
-//   labels: PropTypes.array.isRequired,
-//   sx: PropTypes.object
-// };
+MachineStatus.propTypes = {
+  chartSeries: PropTypes.array.isRequired,
+  labels: PropTypes.array.isRequired,
+  sx: PropTypes.object
+};

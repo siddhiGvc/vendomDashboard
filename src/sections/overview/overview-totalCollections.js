@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';
+import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
+import {FaRupeeSign} from "react-icons/fa"
 import {
   Avatar,
   Box,
@@ -23,7 +25,7 @@ export const TotalCollections = (props) => {
           justifyContent="space-between"
           spacing={3}
         >
-          <Stack spacing={1}>
+          <Stack spacing={1} >
             <Typography
               color="text.secondary"
               gutterBottom
@@ -31,8 +33,8 @@ export const TotalCollections = (props) => {
             >
               {name}
             </Typography>
-            <Typography variant="h4">
-              {value}
+            <Typography variant="h5" >
+              {`${value}`}
             </Typography>
           </Stack>
           <Avatar
@@ -43,7 +45,7 @@ export const TotalCollections = (props) => {
             }}
           >
             <SvgIcon>
-              <ListBulletIcon />
+              <FaRupeeSign/>
             </SvgIcon>
           </Avatar>
         </Stack>
@@ -59,6 +61,6 @@ export const TotalCollections = (props) => {
 };
 
 // TotalCollections.propTypes = {
-//   value: PropTypes.number.isRequired,
+//   value: PropTypes.string.isRequired,
 //   sx: PropTypes.object
 // };

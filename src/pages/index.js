@@ -1,3 +1,4 @@
+"use client"
 import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
 import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
@@ -14,41 +15,52 @@ import { StockStatus } from 'src/sections/overview/overview-stockStatus';
 import { useEffect ,useState} from 'react';
 import moment from 'moment';
 import $ from 'jquery';
-
+import { useRouter } from 'next/router';
 const now = new Date();
 
 const Page = () => {
   const [data,setData]=useState({data:[],dataAll:[]});
-  const [machine,setMachines]=useState()
-  const [online,setOnline]=useState();
-  const [ofline,setOfline]=useState();
-  const [cash,setCash]=useState();
-  const [minuteWiseData,setMinuteWiseData]=useState([]);
-
+  const [machine,setMachines]=useState(0)
+  const [online,setOnline]=useState(0);
+  const [ofline,setOfline]=useState(0);
+  const [cash,setCash]=useState(0);
+  // const [minuteWiseData,setMinuteWiseData]=useState([]);
+  const router=useRouter();
   const filterOnline = q => moment().diff(moment.utc((q.lastHeartbeatTime || q.lastOnTime).replace('Z', '')), 'minute') < 5;
   const filterStock = q => moment().diff(moment.utc((q.lastHeartbeatTime || q.lastOnTime).replace('Z', '')), 'minute') < 5;
 
-  const amountText = amt => {
-    amt = amt || 0;
-    // console.log(amt);
-    // parseFloat(originalValue.toFixed(2))
-    const cr = (amt / 100000) / 100;
+
+
+const amountText = amt => {
+  amt = amt || 0;
+  console.log(amt);
+  if(amt>=10000000)
+  {
+    var cr = parseInt(amt / 100000) / 100;
     const Cr=parseFloat(cr.toFixed(2))
-    const l = (amt / 1000) / 100;
+    return Cr+' Cr';
+  }
+  else if(amt>=100000)
+  {
+    var l = parseInt(amt / 1000) / 100;
     const L=parseFloat(l.toFixed(2))
-    const k = (amt / 10) / 100;
+    return L+' L';
+  }
+  else if(amt>=1000)
+  {
+    var k = parseInt(amt / 10) / 100;
     const K=parseFloat(k.toFixed(2))
-    const result = Cr < 1 ?
-    L < 1 ? `${K} K` : `${l} L` :
-    `${cr} Cr`;
-//     const originalValue = 27.75676;
-// const roundedValue = parseFloat(originalValue.toFixed(2));
-// console.log(roundedValue);
-      
-    console.log(result);
-      return result;
-    
-   
+    return K+' K';
+  }
+  else
+  {
+    return amt;
+  }
+ 
+ 
+
+  // return cr < 1 ? l < 1 ? k + ' K' : l + ' L' : cr + ' Cr';
+  // return k + ' K';
 };
 const sum = (a, b) => a + b;
 
@@ -79,8 +91,9 @@ const sum = (a, b) => a + b;
           
         },
         error: (_) => {
+          // console.log("Error")
           // Handle an error here (e.g., redirect to the login page)
-          window.location = '/login';
+          router.push('/auth/login')
         },
       });
   
@@ -88,11 +101,13 @@ const sum = (a, b) => a + b;
   }
 
   useEffect(()=>{
+  
+
+    LoadData();
     setInterval(()=>{
       LoadData();
 
     },2000)
-    
     
   
   },[])
@@ -115,6 +130,7 @@ const sum = (a, b) => a + b;
         <Grid
           container
           spacing={3}
+          mt={"-60px"}
         >
           <Grid
             xs={12}
@@ -124,7 +140,7 @@ const sum = (a, b) => a + b;
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '100%' }}
+              sx={{ height: '90%' }}
               value={machine}
               name="Machines Installed"
             />
@@ -137,7 +153,7 @@ const sum = (a, b) => a + b;
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '100%' }}
+              sx={{ height: '90%' }}
               value={online}
               name="Machines Running"
             />
@@ -148,8 +164,8 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <TotalCollections
-              sx={{ height: '100%' }}
-              value={data.data.length ?amountText(data.data.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
+              sx={{ height: '90%' }}
+              value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
           </Grid>
@@ -159,8 +175,8 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <ItemsDispends
-              sx={{ height: '100%' }}
-              value={data.dataAll.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
+              sx={{ height: '90%' }}
+              value={data.data.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
           </Grid>
@@ -183,20 +199,20 @@ const sum = (a, b) => a + b;
             />
           </Grid> */}
           <Grid
-            xs={22}
+            xs={24}
             md={6}
-            lg={30}
+            lg={32}
             container
             spacing={3}
           >
             <Grid 
-               xs={12}
+               xs={25}
                md={6}
-               lg={6}>
+               lg={5.9}>
             <MachineStatus
               chartSeries={[online,machine-online]}
               labels={['Online','Offline']}
-              chartType="donut"
+              sx={{ height: '100%' }}
             
             />
             </Grid>
@@ -213,7 +229,7 @@ const sum = (a, b) => a + b;
                 data.data.filter(filterOnline).filter(m => m.spiral_a_status === 2).length ,
               ]}
               labels={['Ok','Low','Empty','Unknown']}
-              chartType="donut"
+              sx={{ height: '100%' }}
            
             />
             </Grid>
