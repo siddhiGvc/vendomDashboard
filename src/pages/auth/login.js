@@ -52,12 +52,16 @@ export default function SignIn() {
     })
     .then((json)=>{
     //  console.log(json);
-     console.log(json.data.token);
-      // localStorage.setItem('name',json.data.user.name);
+    //  console.log(json.data.token);
+      localStorage.setItem('name',json.data.user.name);
       window.sessionStorage.setItem('token', json.data.token);
       
       // localStorage.setItem("token",JSON.stringify(json.data.token));
       router.push('/')
+    })
+    .catch((err)=>{
+      console.log("Login Error");
+
     })
 
 

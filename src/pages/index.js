@@ -33,7 +33,7 @@ const Page = () => {
 
 const amountText = amt => {
   amt = amt || 0;
-  console.log(amt);
+ 
   if(amt>=10000000)
   {
     var cr = parseInt(amt / 100000) / 100;
