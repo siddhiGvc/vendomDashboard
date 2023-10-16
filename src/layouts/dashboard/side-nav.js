@@ -28,7 +28,7 @@ export const SideNav = (props) => {
     <Scrollbar
       sx={{
         height: '100%',
-      
+        width:'200px',
         '& .simplebar-content': {
           height: '100%'
         },
@@ -41,7 +41,8 @@ export const SideNav = (props) => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%'
+          height: '100%',
+          
         }}
       >
         <Box sx={{ p: 3 }}>

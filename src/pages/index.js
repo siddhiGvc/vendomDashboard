@@ -66,7 +66,7 @@ const sum = (a, b) => a + b;
 
 
     const LoadData=()=>{
-      const apiUrl = 'http://165.232.177.23:8080/api/machine/data?status=Online,Offine & city=Mumbai'; // Replace with your API URL
+      const apiUrl = 'http://zest-iot.in:8080/api/machine/data?status=Online,Offine & city=Mumbai'; // Replace with your API URL
       const url = `${apiUrl}/me`;
   
       // Set up the headers
@@ -123,7 +123,9 @@ const sum = (a, b) => a + b;
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8
+        py: 8,
+        // backgroundColor:'whitesmoke'
+        backgroundColor:'rgba(88, 115, 254, 0.04)'
       }}
     >
       <Container maxWidth="xl">
@@ -140,7 +142,7 @@ const sum = (a, b) => a + b;
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '90%' }}
+              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
               value={machine}
               name="Machines Installed"
             />
@@ -153,7 +155,7 @@ const sum = (a, b) => a + b;
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '90%' }}
+              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
               value={online}
               name="Machines Running"
             />
@@ -164,7 +166,7 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <TotalCollections
-              sx={{ height: '90%' }}
+              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
@@ -175,8 +177,8 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <ItemsDispends
-              sx={{ height: '90%' }}
-              value={data.data.length ?amountText(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
+              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
+              value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
           </Grid>
@@ -212,7 +214,7 @@ const sum = (a, b) => a + b;
             <MachineStatus
               chartSeries={[online,machine-online]}
               labels={['Online','Offline']}
-              sx={{ height: '100%' }}
+              sx={{ height: '100%',backgroundColor:'whitesmoke' }}
             
             />
             </Grid>
@@ -229,7 +231,7 @@ const sum = (a, b) => a + b;
                 data.data.filter(filterOnline).filter(m => m.spiral_a_status === 2).length ,
               ]}
               labels={['Ok','Low','Empty','Unknown']}
-              sx={{ height: '100%' }}
+              sx={{ height: '100%',backgroundColor:'whitesmoke' }}
            
             />
             </Grid>
