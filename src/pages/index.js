@@ -101,13 +101,24 @@ const sum = (a, b) => a + b;
   }
 
   useEffect(()=>{
+
+    var token=sessionStorage.getItem('token');
+    if(!token){
+      router.push('/auth/login')
+
+    }
+    else
+    {
+      LoadData();
+      setInterval(()=>{
+        LoadData();
+  
+      },2000)
+
+    }
   
 
-    LoadData();
-    setInterval(()=>{
-      LoadData();
-
-    },2000)
+ 
     
   
   },[])
@@ -142,7 +153,7 @@ const sum = (a, b) => a + b;
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '90%' }}
               value={machine}
               name="Machines Installed"
             />
@@ -155,7 +166,7 @@ const sum = (a, b) => a + b;
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '90%' }}
               value={online}
               name="Machines Running"
             />
@@ -166,7 +177,7 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <TotalCollections
-              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '90%' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
@@ -177,7 +188,7 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <ItemsDispends
-              sx={{ height: '90%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '90%' }}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
@@ -214,7 +225,7 @@ const sum = (a, b) => a + b;
             <MachineStatus
               chartSeries={[online,machine-online]}
               labels={['Online','Offline']}
-              sx={{ height: '100%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '100%' }}
             
             />
             </Grid>
@@ -231,7 +242,7 @@ const sum = (a, b) => a + b;
                 data.data.filter(filterOnline).filter(m => m.spiral_a_status === 2).length ,
               ]}
               labels={['Ok','Low','Empty','Unknown']}
-              sx={{ height: '100%',backgroundColor:'whitesmoke' }}
+              sx={{ height: '100%' }}
            
             />
             </Grid>

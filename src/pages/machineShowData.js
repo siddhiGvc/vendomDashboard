@@ -1,4 +1,5 @@
 "use client"
+import styles from "./css/machinedata.module.css"
 import Head from 'next/head';
 import { subDays, subHours } from 'date-fns';
 import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material';
@@ -19,7 +20,6 @@ import { useRouter } from 'next/router';
 import MultiSelectAll from 'src/sections/machinedata/machinestatusSelector';
 import StickyHeadTable from 'src/sections/machinedata/table';
 import { Gradient } from '@mui/icons-material';
-
 
 const Page=()=>{
     const [data,setData]=useState({data:[],dataAll:[]});
@@ -120,58 +120,23 @@ const Page=()=>{
     },[])
 
 
-    return<>
 
-    <Box
-      component="main"
-      sx={{
-        width:'100%',
-        flexGrow: 1,
-        py: 8,
-        px:0,
-        backgroundColor:'whitesmoke'
-      }}
-    >
-      <Container maxWidth="xl">
-        <Grid>
-        <Grid
-         xs={14}
-         md={6}
-         lg={12}
-         container
-        spacing={-5}
-         
-        >
-        <Grid
-           xs={10}
-           md={6}
-           lg={3.0}
-           sx={{marginTop:"-43px",backgroundColor:"white"}}>
+
+    return <>
+    <div className={styles.container}>
+        <div className={styles.subContainer}>
+            <div className={styles.selectors}>
             <MultiSelectAll />
             <MultiSelectAll />
             <MultiSelectAll />
             <MultiSelectAll/>
-                <MultiSelectAll/>
-                <MultiSelectAll/>
-         
-        </Grid>
-        <Grid
-           xs={15}
-           md={6}
-           lg={7.9}
-           sx={{
-            marginLeft:"50px"
+            <MultiSelectAll/>
+            <MultiSelectAll/>
 
-           }}>
-        <Grid
-        container
-        spacing={21}
-         sx={{
-          marginTop:"-130px"
-         }}
-         
-        >
-          <Grid
+            </div>
+            <div className={styles.machineData}>
+                <div>
+            <Grid
             xs={10}
             sm={6}
             lg={2}
@@ -179,7 +144,7 @@ const Page=()=>{
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={machine}
               name="Machines Installed"
             />
@@ -192,7 +157,7 @@ const Page=()=>{
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={online}
               name="Machines Running"
             />
@@ -203,7 +168,7 @@ const Page=()=>{
             lg={2}
           >
             <TotalCollections
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
@@ -214,22 +179,13 @@ const Page=()=>{
             lg={2}
           >
             <ItemsDispends
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
           </Grid>
-          </Grid>
-         
-          
-        <Grid
-          container
-          spacing={21}
-          sx={{
-            marginTop:"-160px"
-           }}
-          
-        >
+          </div>
+          <div>
           <Grid
             xs={12}
             sm={6}
@@ -238,7 +194,7 @@ const Page=()=>{
             <StockEmpty
               difference={12}
               positive
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={machine}
               name="Stock Empty"
             />
@@ -251,7 +207,7 @@ const Page=()=>{
             <StockLow
               difference={16}
               positive={false}
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={online}
               name="Stock Low"
             />
@@ -262,7 +218,7 @@ const Page=()=>{
             lg={2}
           >
             <BurningEnabled
-              sx={{ height: '90%',width:'160px' }}
+              sx={{ height: '150px',width:'160px' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Burning Enabled"
             />
@@ -273,31 +229,29 @@ const Page=()=>{
             lg={2}
           >
             <BurningCycles
-              sx={{ height: '90%',width:'160px'}}
+              sx={{ height: '150px',width:'160px'}}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Burning Cycles"
             />
           </Grid>
-          </Grid>
-          </Grid>
-          </Grid>
-          <Grid
-           sx={{
-            marginLeft:"310px",
-            marginTop:'-10px'
-           }}>
-              <StickyHeadTable/>
-              </Grid>
-              </Grid>
-          </Container>
-         
-          </Box>
-    
+          </div>
+          <div className={styles.table}>
+            <StickyHeadTable/>
+          </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
     
     
     
     </>
-
 }
 
 Page.getLayout = (page) => (
@@ -307,4 +261,3 @@ Page.getLayout = (page) => (
   );
   
   export default Page;
-  

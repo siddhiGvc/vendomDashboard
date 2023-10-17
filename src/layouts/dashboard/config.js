@@ -22,7 +22,7 @@ export const items = [
   },
   {
     title: 'Machine Data',
-    path: '/machinedata',
+    path: '/machineShowData',
     icon: (
       <SvgIcon fontSize="small">
         <TbAppsFilled/>
