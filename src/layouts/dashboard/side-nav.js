@@ -28,7 +28,7 @@ export const SideNav = (props) => {
     <Scrollbar
       sx={{
         height: '100%',
-        width:'200px',
+        marginLeft:"30px",
         '& .simplebar-content': {
           height: '100%'
         },

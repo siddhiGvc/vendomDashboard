@@ -21,6 +21,118 @@ import MultiSelectAll from 'src/sections/machinedata/machinestatusSelector';
 import StickyHeadTable from 'src/sections/machinedata/table';
 import { Gradient } from '@mui/icons-material';
 
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import InputBase from '@mui/material/InputBase';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange, green,red } from '@mui/material/colors';
+import {GiCheckMark} from "react-icons/gi"
+import {FaXmark} from "react-icons/fa6"
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const Machines = [
+  'Online',
+  'Offline',
+ 
+];
+
+const Stocks=[
+    'Ok',
+    'Low',
+    'Empty',
+
+]
+
+const Burns=[
+    'Idle',
+    'Burning',
+    'Error',
+
+]
+const Zones=[
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6'
+
+]
+const Wards=[
+  'A',
+  'D',
+  'E',
+  'FN',
+  'FS',
+  'GS',
+  'HE',
+  'HW',
+  'KE',
+  'L',
+  'MW',
+  'N',
+  'PS'
+
+
+]
+
+const Beats=[
+  
+
+]
+
+
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}));
+
+
 const Page=()=>{
     const [data,setData]=useState({data:[],dataAll:[]});
     const [machine,setMachines]=useState(0)
@@ -31,6 +143,38 @@ const Page=()=>{
     const [stockLow,setStockLow]=useState(0);
     const [burningEnabled,setBurningEnambled]=useState(0);
     const [burningCycles,setBurningCycles]=useState(0);
+    const [machineStatus, setMachineStatus] = React.useState([]);
+    const [stockStatus,setStockStatus] = React.useState([]);
+    const [burnStatus,setBurnStatus] = React.useState([]);
+    const [zone,setZone] = React.useState([]);
+
+    const handleMachineChange = (event) => {
+      const {
+        target: { value },
+      } = event;
+      setMachineStatus(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+    const handleStockChange = (event) => {
+        const {
+          target: { value },
+        } = event;
+        setStockStatus(
+          // On autofill we get a stringified value.
+          typeof value === 'string' ? value.split(',') : value,
+        );
+      };
+      const handleBurnChange = (event) => {
+        const {
+          target: { value },
+        } = event;
+        setBurnStatus(
+          // On autofill we get a stringified value.
+          typeof value === 'string' ? value.split(',') : value,
+        );
+      };
     // const [minuteWiseData,setMinuteWiseData]=useState([]);
     const router=useRouter();
     const filterOnline = q => moment().diff(moment.utc((q.lastHeartbeatTime || q.lastOnTime).replace('Z', '')), 'minute') < 5;
@@ -126,12 +270,215 @@ const Page=()=>{
     <div className={styles.container}>
         <div className={styles.subContainer}>
             <div className={styles.selectors}>
-            <MultiSelectAll />
-            <MultiSelectAll />
-            <MultiSelectAll />
-            <MultiSelectAll/>
-            <MultiSelectAll/>
-            <MultiSelectAll/>
+
+
+            <FormControl sx={{ m: 1, width: 225 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Machine Status</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={machineStatus}
+          onChange={handleMachineChange}
+          input={<BootstrapInput/>}
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return "None Selected";
+            } else if (selected.length === 1) {
+              return selected[0];
+            } else if(selected.length==Machines.length) {
+              return `All Selected (${selected.length})`
+            }
+            else if(selected.length<Machines.length)
+            {
+              return `${selected.length} Selected`
+            }
+
+          }}
+          MenuProps={MenuProps}
+        >
+          {Machines.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox defaultChecked checked={machineStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl sx={{ m: 1, width: 225 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Stock Status</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={stockStatus}
+          onChange={handleStockChange}
+          input={<BootstrapInput/>}
+          placeholder="Non Selected"
+           
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return "None Selected";
+            } else if (selected.length === 1) {
+              return selected[0];
+            } else if(selected.length==Stocks.length) {
+              return `All Selected (${selected.length})`
+            }   
+            else if(selected.length<Stocks.length)
+            {
+              return `${selected.length} Selected`
+            }
+            else if(!selected){
+              return "None Selected";
+            }
+
+          }}
+          MenuProps={MenuProps}
+        >
+        
+          {Stocks.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox defaultChecked checked={stockStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+
+      <FormControl sx={{ m: 1, width: 225 }}>
+   
+        <InputLabel id="demo-multiple-checkbox-label">Burn Status</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={burnStatus}
+          onChange={handleBurnChange}
+          input={<BootstrapInput/>}
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return "None Selected";
+            } else if (selected.length === 1) {
+              return selected[0];
+            } else if(selected.length==Burns.length) {
+              return `All Selected (${selected.length})`
+            }
+            else if(selected.length<Burns.length)
+            {
+              return `${selected.length} Selected`
+            }
+
+          }}
+          MenuProps={MenuProps}
+        >
+          {Burns.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox defaultChecked checked={burnStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <hr style={{width:'90%',color:'grey'}}></hr>
+      <div style={{display:"flex",width:'100%',height:'70px',alignItems:'center'}}>
+      <Avatar sx={{ backgroundColor:"success.main",marginBottom:'-22px'}} variant="square">
+        <GiCheckMark/>
+      </Avatar>
+      <FormControl sx={{ m: 1, width: 150}}>
+        <InputLabel id="demo-multiple-checkbox-label">Zone</InputLabel>
+      
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={burnStatus}
+          onChange={handleBurnChange}
+          input={<BootstrapInput/>}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+          {Burns.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={burnStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+    </FormControl>
+    <Avatar sx={{ bgcolor:"error.main",marginBottom:'-22px' }} variant="square">
+       <FaXmark/>
+      </Avatar>
+      </div>
+
+
+
+      <div style={{display:"flex",width:'100%',height:'70px',alignItems:'center'}}>
+      <Avatar sx={{ bgcolor:'success.main' ,marginBottom:'-22px'}} variant="square">
+      <GiCheckMark/>
+      </Avatar>
+      <FormControl sx={{ m: 1, width: 150}}>
+        <InputLabel id="demo-multiple-checkbox-label">Ward</InputLabel>
+      
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={burnStatus}
+          onChange={handleBurnChange}
+          input={<BootstrapInput/>}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+          {Burns.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={burnStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+    </FormControl>
+    <Avatar sx={{ bgcolor: 'error.main',marginBottom:'-22px' }} variant="square">
+           <FaXmark/>
+      </Avatar>
+      </div>
+
+
+      <div style={{display:"flex",width:'100%',height:'70px',alignItems:'center'}}>
+      <Avatar sx={{ bgcolor:'success.main' ,marginBottom:'-22px'}} variant="square">
+      <GiCheckMark/>
+      </Avatar>
+      <FormControl sx={{ m: 1, width: 150}}>
+        <InputLabel id="demo-multiple-checkbox-label">Beat</InputLabel>
+      
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={burnStatus}
+          onChange={handleBurnChange}
+          input={<BootstrapInput/>}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+          {Burns.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={burnStatus.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+    </FormControl>
+    <Avatar sx={{ bgcolor:'error.main',marginBottom:'-22px' }} variant="square">
+        <FaXmark/>
+      </Avatar>
+      </div>
+
+
+           
+         
 
             </div>
             <div className={styles.machineData}>
@@ -144,7 +491,7 @@ const Page=()=>{
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px',  backgroundColor: '#fff' }}
               value={machine}
               name="Machines Installed"
             />
@@ -157,7 +504,7 @@ const Page=()=>{
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px',   backgroundColor: '#fff'}}
               value={online}
               name="Machines Running"
             />
@@ -168,7 +515,7 @@ const Page=()=>{
             lg={2}
           >
             <TotalCollections
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
@@ -179,7 +526,7 @@ const Page=()=>{
             lg={2}
           >
             <ItemsDispends
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff' }}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
@@ -194,7 +541,7 @@ const Page=()=>{
             <StockEmpty
               difference={12}
               positive
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff' }}
               value={machine}
               name="Stock Empty"
             />
@@ -207,7 +554,7 @@ const Page=()=>{
             <StockLow
               difference={16}
               positive={false}
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff' }}
               value={online}
               name="Stock Low"
             />
@@ -218,7 +565,7 @@ const Page=()=>{
             lg={2}
           >
             <BurningEnabled
-              sx={{ height: '150px',width:'160px' }}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Burning Enabled"
             />
@@ -229,7 +576,7 @@ const Page=()=>{
             lg={2}
           >
             <BurningCycles
-              sx={{ height: '150px',width:'160px'}}
+              sx={{ height: '150px',width:'160px', backgroundColor: '#fff'}}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Burning Cycles"
             />

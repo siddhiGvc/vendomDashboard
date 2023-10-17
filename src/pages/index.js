@@ -153,7 +153,7 @@ const sum = (a, b) => a + b;
             <MachinesInstalled
               difference={12}
               positive
-              sx={{ height: '90%' }}
+              sx={{ height: '90%',backgroundColor:"#fff" }}
               value={machine}
               name="Machines Installed"
             />
@@ -166,7 +166,7 @@ const sum = (a, b) => a + b;
             <MachinesRunning
               difference={16}
               positive={false}
-              sx={{ height: '90%' }}
+              sx={{ height: '90%', backgroundColor: '#fff' }}
               value={online}
               name="Machines Running"
             />
@@ -177,7 +177,7 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <TotalCollections
-              sx={{ height: '90%' }}
+              sx={{ height: '90%', backgroundColor: '#fff' }}
               value={data.data.length ?amountText(data.dataAll.map(q => (q.cashCurrent + q.cashLife)).reduce(sum)):0}
               name="Total Collections"
             />
@@ -188,7 +188,7 @@ const sum = (a, b) => a + b;
             lg={3}
           >
             <ItemsDispends
-              sx={{ height: '90%' }}
+              sx={{ height: '90%', backgroundColor: '#fff' }}
               value={data.data.length ?(data.dataAll.map(q => (q.qtyCurrent +  q.qtyLife)).reduce(sum)):0}
               name="Items Dispends"
             />
@@ -225,7 +225,7 @@ const sum = (a, b) => a + b;
             <MachineStatus
               chartSeries={[online,machine-online]}
               labels={['Online','Offline']}
-              sx={{ height: '100%' }}
+              sx={{ height: '100%', backgroundColor: '#fff' }}
             
             />
             </Grid>
@@ -242,7 +242,7 @@ const sum = (a, b) => a + b;
                 data.data.filter(filterOnline).filter(m => m.spiral_a_status === 2).length ,
               ]}
               labels={['Ok','Low','Empty','Unknown']}
-              sx={{ height: '100%' }}
+              sx={{ height: '100%', backgroundColor: '#fff' }}
            
             />
             </Grid>

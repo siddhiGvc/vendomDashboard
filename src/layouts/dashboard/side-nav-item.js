@@ -26,9 +26,9 @@ export const SideNavItem = (props) => {
           borderRadius: 1,
           display: 'flex',
           justifyContent: 'flex-start',
-          pl: '18px',
-          pr: '18px',
-          py: '8px',
+          pl: '38px',
+          pr: '38px',
+          py: '28px',
           textAlign: 'left',
           width: '100%',
           ...(active && {

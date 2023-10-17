@@ -71,9 +71,11 @@ export default function StickyHeadTable() {
   };
 
   return (
-    <Paper sx={{ width: '685px', overflow: 'hidden',margin:'auto' }}>
+    <Paper sx={{ width: '700px', overflow: 'hidden',margin:'auto',marginLeft:"-40px",backgroundColor:'#fff' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table
+         stickyHeader
+         aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -96,7 +98,7 @@ export default function StickyHeadTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} style={{backgroundColor:"#fff"}}>
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

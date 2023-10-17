@@ -11,7 +11,7 @@ const LayoutRoot = styled('div')(({ theme }) => ({
   display: 'flex',
   flex: '1 1 auto',
   maxWidth: '100%',
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('sm')]: {
     paddingLeft: SIDE_NAV_WIDTH
   }
 }));
