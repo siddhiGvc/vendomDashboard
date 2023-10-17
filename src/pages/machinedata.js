@@ -16,6 +16,10 @@ import { useEffect ,useState} from 'react';
 import moment from 'moment';
 import $ from 'jquery';
 import { useRouter } from 'next/router';
+import MultiSelectAll from 'src/sections/machinedata/machinestatusSelector';
+import StickyHeadTable from 'src/sections/machinedata/table';
+import { Gradient } from '@mui/icons-material';
+
 
 const Page=()=>{
     const [data,setData]=useState({data:[],dataAll:[]});
@@ -118,7 +122,7 @@ const Page=()=>{
 
     return<>
 
-<Box
+    <Box
       component="main"
       sx={{
         flexGrow: 1,
@@ -126,6 +130,31 @@ const Page=()=>{
       }}
     >
       <Container maxWidth="xl">
+        <Grid
+         xs={24}
+         md={6}
+         lg={24}
+         container
+         spacing={0.1}
+        >
+        <Grid
+           xs={10}
+           md={6}
+           lg={1.7}
+           sx={{marginTop:"-43px",backgroundColor:'whitesmoke'}}>
+            <MultiSelectAll />
+            <MultiSelectAll />
+            <MultiSelectAll />
+         
+        </Grid>
+        <Grid
+           xs={15}
+           md={6}
+           lg={5.9}
+           sx={{
+            marginLeft:"50px"
+
+           }}>
         <Grid
           container
           spacing={3}
@@ -236,6 +265,32 @@ const Page=()=>{
             />
           </Grid>
           </Grid>
+          </Grid>
+          </Grid>
+          </Container>
+          <Container maxWidth="xl">
+            <Grid 
+              xs={24}
+              md={6}
+              lg={24}
+              container
+              spacing={6}>
+              <Grid
+              xs={10}
+              md={6}
+              lg={2}
+              sx={{width:"200px"}}>
+                <MultiSelectAll/>
+                <MultiSelectAll/>
+                <MultiSelectAll/>
+
+              </Grid>
+              <Grid>
+              <StickyHeadTable/>
+              </Grid>
+
+            </Grid>
+          
           </Container>
           </Box>
     

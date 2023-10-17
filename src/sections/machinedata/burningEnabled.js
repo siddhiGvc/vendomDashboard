@@ -78,10 +78,10 @@ export const BurningEnabled = (props) => {
   );
 };
 
-BurningEnabled.propTypes = {
-  difference: PropTypes.number,
-  positive: PropTypes.bool,
-  value: PropTypes.number,
-  sx: PropTypes.object
-};
+// BurningEnabled.propTypes = {
+//   difference: PropTypes.number,
+//   positive: PropTypes.bool,
+//   value: PropTypes.number,
+//   sx: PropTypes.object
+// };
 
